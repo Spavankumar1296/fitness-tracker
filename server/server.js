@@ -1,8 +1,9 @@
 const express = require("express");
 const path = require("path");
 // Instead of: "./routes", use "./server/routes" if you kept files in server/
-const routes = require("./server/routes");
-const db = require("./server/config/connection");
+const routes = require('./routes'); // ✅ correct
+
+const db = require("./config/connection");
 const cors = require("cors");
 require("dotenv").config();
 
