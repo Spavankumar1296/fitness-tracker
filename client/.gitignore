@@ -1,23 +1,29 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Environment variables
 .env
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
+# Node modules
+/node_modules
+/client/node_modules
+
+# Yarn & npm logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Testing
+/coverage
+
+# Root build folder (e.g. if you ever build server)
+/build
+
+# Allow React build folder for deployment
+!client/build
+
+# Misc
+.DS_Store
+.pnp
+.pnp.js

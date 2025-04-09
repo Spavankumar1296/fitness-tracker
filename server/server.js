@@ -12,26 +12,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-// Serve static files in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
+// ✅ Serve static files from React frontend
+app.use(express.static(path.resolve(__dirname, "../../client/build")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  });
-}
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
+});
 
 app.use(routes);
 
-// Test route
-app.get("/", (req, res) => {
-  res.json({
-    message: "Hello from server"
-  });
-});
-
 db.once("open", () => {
   app.listen(PORT, () => {
-    console.log(`API server running on port ${PORT}!`);
+    console.log(`✅ API server running on port ${PORT}!`);
   });
 });
