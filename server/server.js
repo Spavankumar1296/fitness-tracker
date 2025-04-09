@@ -1,8 +1,6 @@
 const express = require("express");
 const path = require("path");
-// Instead of: "./routes", use "./server/routes" if you kept files in server/
-const routes = require('./routes'); // ✅ correct
-
+const routes = require("./routes"); // assuming routes are in server/routes
 const db = require("./config/connection");
 const cors = require("cors");
 require("dotenv").config();
@@ -15,13 +13,14 @@ app.use(express.json());
 app.use(cors());
 
 // ✅ Serve static files from React frontend
-app.use(express.static(path.resolve(__dirname, "../../client/build")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../../client/build", "index.html"));
-});
+app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.use(routes);
+
+// ✅ Serve React app for any other route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
 
 db.once("open", () => {
   app.listen(PORT, () => {
